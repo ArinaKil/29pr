@@ -19,7 +19,7 @@
         <ListView ItemsSource="{Binding Projects}" HorizontalContentAlignment="Stretch" Margin="0,0,0,45">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <elements:Item DataContext="{Binding}"/>
+                    <elements:ProjectItem DataContext="{Binding}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

@@ -1,10 +1,10 @@
-﻿using System.Windows.Controls;
+using System.Windows.Controls;
 
 namespace ProjectManager_Kilunina.View
 {
-    public partial class Main : Page
+    public partial class TasksPage : Page
     {
-        public Main(object Context)
+        public TasksPage(object Context)
         {
             InitializeComponent();
             DataContext = Context;

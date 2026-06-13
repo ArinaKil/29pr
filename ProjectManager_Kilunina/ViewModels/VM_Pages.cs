@@ -4,10 +4,11 @@ namespace ProjectManager_Kilunina.ViewModels
 {
     public class VM_Pages : Notification
     {
-        public VM_Tasks vm_tasks = new VM_Tasks();
+        public VM_Projects vm_projects = new VM_Projects();
+        public VM_Tasks vm_tasks;
         public VM_Pages()
         {
-            MainWindow.init.frame.Navigate(new View.Main(vm_tasks));
+            MainWindow.init.frame.Navigate(new View.Main(vm_projects));
         }
         public RealyCommand OnClose
         {

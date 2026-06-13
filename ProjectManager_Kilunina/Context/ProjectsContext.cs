@@ -4,12 +4,14 @@ using ProjectManager_Kilunina.Models;
 
 namespace ProjectManager_Kilunina.Context
 {
-    public class TasksContext : DbContext
+    public class ProjectsContext : DbContext
     {
+        public DbSet<Projects> Projects { get; set; }
         public DbSet<Tasks> Tasks { get; set; }
-        public TasksContext()
+        public ProjectsContext()
         {
             Database.EnsureCreated();
+            Projects.Load(); 
             Tasks.Load(); 
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>

@@ -1,4 +1,4 @@
-<UserControl x:Class="ProjectManager_Kilunina.View.Items.Item"
+<UserControl x:Class="ProjectManager_Kilunina.View.Items.ProjectItem"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -7,6 +7,11 @@
              mc:Ignorable="d"
              FontFamily="Bahnschrift Light Condensed">
     <UserControl.Resources>
+        <Style TargetType="Button" x:Key="Open">
+            <Setter Property="Background" Value="#FF1B8FD6"/>
+            <Setter Property="BorderBrush" Value="#FF1B8FD6"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
         <Style TargetType="Button" x:Key="Update">
             <Setter Property="Background" Value="#FF2DD61B"/>
             <Setter Property="BorderBrush" Value="#FF2DD61B"/>
@@ -24,7 +29,7 @@
             <DropShadowEffect Opacity="0.1"/>
         </Grid.Effect>
         <Image Width="40" Height="40" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Left"
-               Source="/Images/ic_task.png"/>
+               Source="/Images/ic_project.png"/>
         <Grid Margin="60, 0, 0, 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -34,7 +39,7 @@
                 <Grid.Effect>
                     <DropShadowEffect Opacity="0.1"/>
                 </Grid.Effect>
-                <Label Content="Наименование:" VerticalAlignment="Top" Margin="10, 0, 10, 0"/>
+                <Label Content="Название проекта:" VerticalAlignment="Top" Margin="10, 0, 10, 0"/>
                 <TextBox
                     Text="{Binding Name}"
                     IsEnabled="{Binding IsEnable}"
@@ -47,10 +52,9 @@
                 <Grid.Effect>
                     <DropShadowEffect Opacity="0.1"/>
                 </Grid.Effect>
-                <Label Content="Приоритет:" VerticalAlignment="Top" Margin="10, 0, 10, 0"/>
-                <ComboBox
-                    ItemsSource="{Binding Priorities}"
-                    SelectedItem="{Binding Priority, Mode=TwoWay}"
+                <Label Content="Заказчик:" VerticalAlignment="Top" Margin="10, 0, 10, 0"/>
+                <TextBox
+                    Text="{Binding Customer}"
                     IsEnabled="{Binding IsEnable}"
                     VerticalContentAlignment="Center"
                     Margin="10, 25, 10, 0"
@@ -61,9 +65,9 @@
                 <Grid.Effect>
                     <DropShadowEffect Opacity="0.1"/>
                 </Grid.Effect>
-                <Label Content="Срок выполнения:" VerticalAlignment="Top" Margin="10, 0, 10, 0"/>
+                <Label Content="Срок сдачи:" VerticalAlignment="Top" Margin="10, 0, 10, 0"/>
                 <DatePicker
-                    SelectedDate="{Binding DateExecute}"
+                    SelectedDate="{Binding DateEnd}"
                     IsEnabled="{Binding IsEnable}"
                     Margin="10, 25, 10, 0"
                     VerticalAlignment="Top"
@@ -73,15 +77,29 @@
                 <Grid.Effect>
                     <DropShadowEffect Opacity="0.1"/>
                 </Grid.Effect>
-                <Label Content="Комментарий:" VerticalAlignment="Top" Margin="10, 0, 10, 0"/>
-                <TextBox
-                    Text="{Binding Comment}"
+                <Label Content="Статус:" VerticalAlignment="Top" Margin="10, 0, 10, 0"/>
+                <ComboBox
+                    ItemsSource="{Binding Statuses}"
+                    SelectedItem="{Binding StatusText, Mode=TwoWay}"
                     IsEnabled="{Binding IsEnable}"
                     VerticalContentAlignment="Center"
                     Margin="10, 25, 10, 0"
                     VerticalAlignment="Top"
                     Height="25"/>
             </Grid>
+            <Button Style="{StaticResource Open}"
+                    Command="{Binding OnOpen}"
+                    Content="Открыть"
+                    Height="25"
+                    Width="70"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Right"
+                    Margin="0,10,10,0"
+                    Grid.Column="1">
+                <Button.Effect>
+                    <DropShadowEffect Opacity="0.5" BlurRadius="3" ShadowDepth="3"></DropShadowEffect>
+                </Button.Effect>
+            </Button>
             <Button Style="{StaticResource Update}"
                     Command="{Binding OnEdit}"
                     Content="{Binding IsEnableText}"
@@ -89,24 +107,21 @@
                     Width="70"
                     VerticalAlignment="Top"
                     HorizontalAlignment="Right"
-                    Margin="0,145,10,0"
+                    Margin="0,145,85,0"
                     Grid.Column="1">
                 <Button.Effect>
                     <DropShadowEffect Opacity="0.5" BlurRadius="3" ShadowDepth="3"></DropShadowEffect>
                 </Button.Effect>
             </Button>
-            <Button
-                x:Name="test"
-                Style="{StaticResource Delete}"
-                IsEnabled="{Binding IsEnable}"
-                Command="{Binding OnDelete}"
-                Content="Удалить"
-                Height="25"
-                Width="70"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Right"
-                Margin="0,145,85,0"
-                Grid.Column="1" >
+            <Button Style="{StaticResource Delete}"
+                    Command="{Binding OnDelete}"
+                    Content="Удалить"
+                    Height="25"
+                    Width="70"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Right"
+                    Margin="0,145,10,0"
+                    Grid.Column="1">
                 <Button.Effect>
                     <DropShadowEffect Opacity="0.5" BlurRadius="3" ShadowDepth="3"></DropShadowEffect>
                 </Button.Effect>
